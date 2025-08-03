@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: #121213;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 20px;
+}
+
+h1 {
+	margin-bottom: 20px;
+	color: inherit;
+	letter-spacing: 1px;
+	font-weight: 600;
+}
+
+#board {
+	display: grid;
+	grid-template-columns: repeat(5, 60px);
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.tile {
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 24px;
+	border: 2px solid #3a3a3c;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 600;
+	background-color: inherit;
+	color: inherit;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+.tile.filled {
+	border-color: #565758;
+}
+
+.correct {
+	background-color: #6aaa64;
+	border-color: #6aaa64;
+	color: #fff;
+}
+
+.close {
+	background-color: #c9b458;
+	border-color: #c9b458;
+	color: #fff;
+}
+
+.wrong {
+	background-color: #3a3a3c;
+	border-color: #3a3a3c;
+	color: #fff;
+}
+
+input,
+button {
+	font-family: inherit;
+	color: inherit;
+	background-color: #1a1a1b;
+	border: none;
+	outline: none;
+	padding: 10px 15px;
+	font-size: 16px;
+	border-radius: 5px;
+	margin-top: 20px;
+	text-align: center;
+	transition: background-color 0.3s ease;
+}
+
+#guess-input {
+	width: 200px;
+	margin-right: 10px;
+}
+
+#submit-btn {
+	background-color: #538d4e;
+	cursor: pointer;
+}
+
+#submit-btn:hover {
+	background-color: #6aaa64;
+}
