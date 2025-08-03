@@ -1,2 +1,2 @@
 # Wordle
-A miniproject game to practice fundamentals of javascript.
+A mini-project game to keep my JavaScript fundamentals sharp
