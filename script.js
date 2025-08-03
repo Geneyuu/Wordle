@@ -20,7 +20,6 @@ const words = [
 	"again",
 	"agree",
 	"asset",
-	"about",
 	"adopt",
 	"alive",
 	"alarm",
@@ -47,9 +46,7 @@ const words = [
 	"dance",
 	"dream",
 	"drink",
-	"dream",
 	"dress",
-	"drink",
 	"drive",
 	"field",
 	"final",
@@ -72,7 +69,6 @@ const words = [
 	"ideal",
 	"issue",
 	"judge",
-	"light",
 	"label",
 	"lesson",
 	"learn",
@@ -151,11 +147,9 @@ const words = [
 	"three",
 	"times",
 	"total",
-	"train",
 	"trace",
 	"trail",
 	"track",
-	"thank",
 	"trend",
 	"truck",
 	"under",
@@ -164,184 +158,57 @@ const words = [
 	"upper",
 	"usage",
 	"vocal",
-	"watch",
 	"wheel",
 	"would",
-	"wrong",
 	"yield",
-	"young",
 	"zebra",
 	"quest",
 	"bonus",
 	"peace",
-	"grace",
-	"magic",
 	"proud",
-	"charm",
-	"smile",
-	"happy",
 	"tried",
 	"taste",
 	"touch",
 	"guess",
 	"carry",
-	"shift",
 	"court",
-	"sound",
 	"laugh",
-	"drink",
-	"stone",
-	"plant",
-	"score",
-	"teach",
-	"study",
-	"force",
-	"guard",
-	"river",
-	"judge",
 	"plain",
 	"match",
-	"range",
-	"route",
-	"shape",
-	"solid",
-	"value",
-	"young",
-	"story",
 	"timer",
 	"owner",
-	"order",
 	"enjoy",
-	"agree",
-	"drive",
-	"about",
 	"press",
-	"light",
-	"metal",
 	"frame",
-	"flame",
 	"focus",
-	"final",
 	"clean",
 	"coach",
 	"cream",
-	"field",
 	"floor",
 	"forget",
 	"grade",
 	"grand",
-	"heart",
 	"heavy",
 	"hotel",
-	"issue",
 	"legal",
 	"level",
 	"movie",
-	"minor",
 	"mount",
-	"music",
-	"march",
 	"money",
-	"mouse",
-	"other",
-	"peace",
-	"press",
-	"press",
-	"raise",
-	"route",
-	"share",
-	"sound",
-	"sweet",
-	"today",
-	"watch",
-	"water",
-	"write",
-	"young",
-	"apple",
-	"train",
-	"crane",
-	"grace",
-	"power",
-	"smile",
-	"sound",
-	"teach",
-	"heart",
-	"stone",
-	"plant",
-	"world",
-	"trust",
-	"value",
-	"email",
-	"error",
-	"exact",
-	"faith",
-	"fault",
-	"final",
-	"flame",
-	"fifty",
-	"fight",
-	"fresh",
-	"front",
-	"grain",
-	"guide",
-	"happy",
-	"house",
-	"human",
-	"image",
-	"issue",
-	"judge",
-	"know",
-	"local",
-	"magic",
-	"major",
-	"metal",
-	"minor",
-	"music",
-	"novel",
 	"offer",
-	"order",
-	"peace",
-	"press",
-	"pride",
 	"prove",
 	"quick",
 	"quiet",
-	"raise",
-	"range",
-	"reach",
-	"score",
-	"scene",
 	"serve",
-	"smile",
-	"sound",
-	"space",
-	"story",
-	"style",
-	"table",
-	"thank",
 	"those",
-	"times",
-	"today",
-	"trace",
-	"trust",
-	"value",
-	"water",
-	"watch",
-	"wrong",
-	"young",
 	"zippy",
 	"chaos",
 	"delay",
-	"exact",
 	"fever",
 	"globe",
-	"heart",
-	"house",
-	"match",
 	"pupil",
 	"rally",
 	"tiger",
-	"vocal",
 ];
 
 const targetWord = words[Math.floor(Math.random() * words.length)];
@@ -373,6 +240,22 @@ function showResetButton() {
 	document.body.appendChild(resetBtn);
 }
 
+// Real-time typing display
+function handleTyping() {
+	const value = guessInput.value.trim().toLowerCase();
+	const rowOffset = currentRow * 5;
+
+	for (let i = 0; i < 5; i++) {
+		const tile = board.children[rowOffset + i];
+		tile.textContent = value[i] || "";
+		tile.className = "tile";
+
+		if (value[i]) {
+			tile.classList.add("pop");
+			tile.offsetWidth;
+		}
+	}
+}
 // Main guess handler
 function handleGuess() {
 	const guess = guessInput.value.trim().toLowerCase();
@@ -412,23 +295,20 @@ function handleGuess() {
 	if (currentRow === maxTries) {
 		submitBtn.disabled = true;
 		guessInput.disabled = true;
-		setTimeout(
-			() =>
-				alert(
-					`💀 Out of tries! The word was "${targetWord.toUpperCase()}"`
-				),
-			100
-		);
+		setTimeout(() => {
+			alert(
+				`💀 Out of tries! The word was "${targetWord.toUpperCase()}"`
+			);
+		}, 100);
 		showResetButton();
 	}
 }
 
-// Submit button click
+// Event listeners
 submitBtn.addEventListener("click", handleGuess);
-
-// Enter key trigger
 guessInput.addEventListener("keydown", (e) => {
 	if (e.key === "Enter") {
 		handleGuess();
 	}
 });
+guessInput.addEventListener("input", handleTyping);
